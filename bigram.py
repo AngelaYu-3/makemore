@@ -60,9 +60,9 @@ sampling from the model
 
 g = torch.Generator().manual_seed(2147483647)
 P = N.float()
-P = P / P.sum(1, keepdim = True)
+P /= P.sum(1, keepdim = True)
 
-for i in range(20):
+for i in range(5):
     out = []
     ix = 0
     while True:
@@ -74,6 +74,42 @@ for i in range(20):
         out.append(itos[ix])
         if ix == 0:
             break
-    print(''.join(out))
+    # print(''.join(out))
 
+"""
+loss function
+finding how good bigram model is at creating valid names based on bigram probabilities, want to maximize likelihood
+the model parameters are the frequencies giving by plot S
+"""
 
+# GOAL: maxmize likelihood of the data model parameters (statistical modeling)
+# equivalent to maximizing the log likelihood (because log is monotonic)
+# equivalent to minimizing the negative log likelihood
+# equivalent to minimizing the average negative log likelihood
+
+# log loss: log(a * b * c) = log(a) + log(b) + log(c)
+
+# EXAMPLE (according to this trained model on this data set):
+# 'andrej': negLogProb=3.039  unlikely name
+# 'angela': negLogProb=2.130  semi likely name
+# 'emily':  negLogProb=2.3866 semi likely name
+
+neg_log_likelihood = 0
+n = 0
+
+for w in ['john']:
+    chs = ['.'] + list(w) + ['.']
+    for ch1, ch2 in zip(chs, chs[1:]):
+        ix1 = stoi[ch1]
+        ix2 = stoi[ch2]
+        prob = P[ix1, ix2]
+        logprob = torch.log(prob)
+        neg_log_likelihood += (-logprob)
+
+        n += 1
+        print(f'{ch1}{ch2} prob: {prob:.4f}   negative logprob: {neg_log_likelihood:.4f}')
+
+# print(f'{log_likelihood=}')
+
+# print(f'{nll=}')
+print(f'average negative log likelihood: {(neg_log_likelihood/n):.4f}')
