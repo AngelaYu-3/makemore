@@ -1,3 +1,7 @@
+"""
+simple implementation of bigram, output probability predictions of names created by using probabilities of a character following another
+"""
+
 import torch
 import matplotlib.pyplot as plt
 
@@ -59,7 +63,7 @@ sampling from the model
 # ix = torch.multinomial(p, num_samples = 1, replacement = True, generator = g)
 
 g = torch.Generator().manual_seed(2147483647)
-P = N.float()
+P = (N+1).float()
 P /= P.sum(1, keepdim = True)
 
 for i in range(5):
@@ -97,7 +101,7 @@ the model parameters are the frequencies giving by plot S
 neg_log_likelihood = 0
 n = 0
 
-for w in ['john']:
+for w in words:
     chs = ['.'] + list(w) + ['.']
     for ch1, ch2 in zip(chs, chs[1:]):
         ix1 = stoi[ch1]
