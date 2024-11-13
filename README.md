@@ -4,7 +4,7 @@ makemore takes one text file as the input, where each line is assumed to be one 
 
 This project is for educational purposes and follows the course [Neural Networks: Zero to Hero by Andrej Karpathy](https://www.youtube.com/watch?v=PaCmpygFfXo&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&index=2).
 
-***Source code is commented to demonstrate deep, independent understanding of core concepts as well as for ease of future read-throughs. Additional files are included as part of learning process.***
+***Source code is commented to demonstrate deep, independent understanding of core concepts as well as for ease of future read-throughs. Additional coding files used during independent learning process also included. Annotated research papers models are implemented on are also included.***
 ___
 
 ## Key Papers Current Implementation Follows
