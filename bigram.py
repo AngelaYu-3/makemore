@@ -78,7 +78,7 @@ for i in range(5):
         out.append(itos[ix])
         if ix == 0:
             break
-    # print(''.join(out))
+    print(''.join(out))
 
 """
 loss function

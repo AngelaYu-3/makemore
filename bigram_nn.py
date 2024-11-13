@@ -17,6 +17,7 @@ xs, ys = [], []
 chars = sorted(list(set(''.join(words))))
 stoi = {s:(i+1) for i,s in enumerate(chars)}
 stoi['.'] = 0
+itos = {i:s for s, i in stoi.items()}
 
 for w in words:
     chs = ['.'] + list(w) + ['.']
@@ -40,13 +41,13 @@ for k in range(iterations):
 
     # forward pass
     xenc = F.one_hot(xs, num_classes=27).float()    # input to the network
-    logits = xenc @ W                               # log(counts)
+    logits = xenc @ W                               # log(counts) done with matrix multiplication
     counts = logits.exp()                           # log(counts) exponentiated -> equivalent to the N matrix (counts for the next character)
     probs = counts / counts.sum(1, keepdims=True)   # probabilities for next character
     # log(counts) exponentiated is 'softmax' takes outputs and produces probabilities (positive values that sum to 1)
 
     # loss function
-    loss = -probs[torch.arange(num), ys].log().mean()
+    loss = -probs[torch.arange(num), ys].log().mean() + 0.01*(W**2).mean()
     print(f'loss: {loss.item()}')
 
     # backward pass
@@ -55,4 +56,25 @@ for k in range(iterations):
 
     # update weights
     W.data += -50 * W.grad
+
+
+"""
+sampling from model (testing from model, getting names outputted from trained model)
+getting 5 new names from the model
+"""
+
+for i in range(5):
+    out = []
+    ix = 0
+    while True:
+        xenc = F.one_hot(torch.tensor([ix]), num_classes=27).float()
+        logits = xenc @ W
+        counts = logits.exp()
+        p = counts / counts.sum(1, keepdims=True)
+
+        ix = torch.multinomial(p, num_samples=1, replacement=True).item()
+        out.append(itos[ix])
+        if ix == 0:
+            break
+    print(''.join(out))
 
