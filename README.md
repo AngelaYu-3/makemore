@@ -8,7 +8,7 @@ This project is for educational purposes and follows the course [Neural Networks
 ___
 
 ## Key Papers Current Implementation Follows
-- bigram (one character predicts the next character with a lookup table of counts from name.txt)
+- bigram (one character predicts the next character with a lookup table of counts from name.txt data)
 - bigram_nn (one character predicts the next character with neural network trained on name.txt data)
 - MLP, following [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 - CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499)
