@@ -27,11 +27,11 @@ ___
 
 ## Questions
 
-Q: For bigram.py, why do we want to use nll loss function? Why does using log loss function make working with probabilities in MLPs better?
+**Q: For bigram.py, why do we want to use nll loss function? Why does using log loss function make working with probabilities in MLPs better?**
 
 A: log loss function is monotonic (when a function is always increasing or always decreasing) **(WHY DOES LOG BEING MONOTONIC IMPORTANT FOR FINDING LOSS OF PROBABILITIES IN THIS MLP MODEL?)
 
-Q: What is the point of regularization? Why do we want the weights to be smaller?
+**Q: What is the point of regularization? Why do we want the weights to be smaller?**
 
 A: Regularization applies a "penalty" for large weights that overfit the model (when the model learns training data too closely, including noise and irrelevant details, leading to poor performance on new training data). Encourages model to be more generalized instead of memorizing the data. 
 
