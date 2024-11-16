@@ -10,7 +10,7 @@ ___
 ## Key Papers Current Implementation Follows
 - bigram (one character predicts the next character with a lookup table of counts from name.txt data)
 - bigram_nn (one character predicts the next character with neural network trained on name.txt data)
-- MLP, following [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
+- MLP **[annotated](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/MLP_paper.pdf)**, following [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 - CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499)
 - RNN, following [Mikolov et al. 2010](https://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)
 - LSTM, following [Graves et al. 2014](https://arxiv.org/abs/1308.0850)
