@@ -29,7 +29,7 @@ ___
 
 **Q: For bigram.py, why do we want to use nll loss function? Why does using log loss function make working with probabilities in MLPs better?**
 
-A: log loss function is monotonic (when a function is always increasing or always decreasing) **(why does log being monotonic important for finding loss of probabilities in this mlp model?)
+A: log loss function is monotonic (when a function is always increasing or always decreasing) **(why does log being monotonic important for finding loss of probabilities in this mlp model?)**
 
 **Q: What is the point of regularization?**
 
