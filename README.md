@@ -31,7 +31,7 @@ ___
 
 A: log loss function is monotonic (when a function is always increasing or always decreasing) **(why does log being monotonic important for finding loss of probabilities in this mlp model?)
 
-**Q: What is the point of regularization? Why do we want the weights to be smaller?**
+**Q: What is the point of regularization?**
 
 A: Encourages model to be more generalized instead of memorizing the data. Reduces overfitting of the model (when the model learns training data too closely, including noise and irrelevant details, leading to poor performance on new training data). 
 
