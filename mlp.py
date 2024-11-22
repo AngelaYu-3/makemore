@@ -16,6 +16,7 @@ chars = sorted(list(set(''.join(words))))
 stoi = {s:i+1 for i, s in enumerate(chars)}
 stoi['.'] = 0
 itos = {i:s for s,i in stoi.items()}
+vocab_size = len(itos)
 
 
 """
@@ -51,11 +52,12 @@ Xte, Yte = build_dataset(words[n2:])       # testing data is 10% of total data
 
 
 
-dimensions = 10
-C = torch.randn((27, dimensions))
-W1 = torch.randn((block_size * dimensions, 200))
-b1 = torch.randn(200)
-W2 = torch.randn((200, 27))
+n_dimensions = 10
+n_hidden_layers = 200
+C = torch.randn((27, n_dimensions))
+W1 = torch.randn((block_size * n_dimensions, n_hidden_layers ))
+b1 = torch.randn(n_hidden_layers )
+W2 = torch.randn((n_hidden_layers , 27))
 b2 = torch.randn(27)
 parameters = [C, W1, b1, W2, b2]
 
@@ -65,22 +67,25 @@ for p in parameters:
 learning_rate_exp = torch.linspace(-3, 0, 1000)
 learning_rate_steps = 10 ** learning_rate_exp
 
-iterations = 10000
+steps = 20000
+batch_size = 32
 learning_rate_i = []
 lossi = []
 stepi = []
 
-for i in range(iterations):
+for i in range(steps):
     """
     minibatch construct
     """
-    ix = torch.randint(0, Xtr.shape[0], (32,))
+    ix = torch.randint(0, Xtr.shape[0], (batch_size,))
 
     """
     forward pass
     """
     emb = C[Xtr[ix] ]                             # embedding all integers within X with lookup table C (2 dimensions)
-    h = torch.tanh(emb.view(-1, block_size * dimensions) @ W1 + b1)
+    embcat = emb.view(emb.shape[0], -1)
+    hpreact = embcat @ W1 + b1
+    h = torch.tanh(emb.view(-1, block_size * n_dimensions) @ W1 + b1)
     logits = h @ W2 + b2
     loss = F.cross_entropy(logits, Ytr[ix])       # implementing loss function (nll)
     # counts = logits.exp()
@@ -105,11 +110,11 @@ for i in range(iterations):
     """
     track stats to find optimal learning rate
     """
-    stepi.append(i)
-    lossi.append(loss.log10().item())
+    # stepi.append(i)
+    # lossi.append(loss.log10().item())
 
-plt.plot(stepi, lossi)
-plt.show()
+# plt.plot(stepi, lossi)
+# plt.show()
 
 """
 plotting graph to visualize character embedding in 2 dimensions
@@ -126,11 +131,47 @@ plt.show()
 """
 finding final loss with trained model by comparing predicted outputs with actual outputs
 """
-emb = C[Xdev]
-h = torch.tanh(emb.view(-1, dimensions * block_size) @ W1 + b1)
-logits = h @ W2 + b2
-loss = F.cross_entropy(logits, Ydev)
-print('loss: {}'.format(loss))
+@torch.no_grad()
+def split_loss(split):
+    x,y = {
+        'train': (Xtr, Ytr),
+        'val': (Xdev, Ydev),
+        'test': (Xte, Yte),
+    }[split]
+    emb = C[x] 
+    embcat = emb.view(emb.shape[0], -1)
+    h = torch.tanh(embcat @ W1 + b1)
+    logits = h @ W2 + b2
+    loss = F.cross_entropy(logits, y)
+    print(split, loss.item())
+
+split_loss('train')
+split_loss('val')
+
+
+"""
+sampling from the model
+"""
+for _ in range(20):
+    out = []
+    context = [0] * block_size
+    while True:
+        # forward pass the neural net
+        emb = C[torch.tensor([context])]
+        h = torch.tanh(emb.view(1, -1) @ W1 + b1)
+        logits = h @ W2 + b2
+        probs = F.softmax(logits, dim=1)
+        # sample from the distribution
+        ix = torch.multinomial(probs, num_samples=1).item()
+        # shift the context window and track the samples
+        context = context[1:] + [ix]
+        out.append(ix)
+        # if we sample the special '.' token, break
+        if ix == 0:
+            break
+
+    #  decode and print the generated word
+    print(''.join(itos[i] for i in out))    
 
 
 
