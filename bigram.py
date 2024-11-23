@@ -6,7 +6,7 @@ import torch
 import matplotlib.pyplot as plt
 
 
-words = open('names.txt','r').read().splitlines()
+words = open('other/names.txt','r').read().splitlines()
 
 """
 using a dictionary to keep track of frequency of bigram (what character likely follows another character)

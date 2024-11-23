@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 """
 read in all words from name.txt
 """
-words = open('names.txt', 'r').read().splitlines()
+words = open('other/names.txt', 'r').read().splitlines()
 
 
 """

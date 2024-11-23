@@ -7,7 +7,7 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 
 
-words = open('names.txt','r').read().splitlines()
+words = open('other/names.txt','r').read().splitlines()
 
 """
 create training set of all the bigrams (x, y)
