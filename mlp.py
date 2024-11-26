@@ -55,10 +55,10 @@ Xte, Yte = build_dataset(words[n2:])       # testing data is 10% of total data
 n_dimensions = 10
 n_hidden_layers = 200
 C = torch.randn((27, n_dimensions))
-W1 = torch.randn((block_size * n_dimensions, n_hidden_layers ))
-b1 = torch.randn(n_hidden_layers )
-W2 = torch.randn((n_hidden_layers , 27))
-b2 = torch.randn(27)
+W1 = torch.randn((block_size * n_dimensions, n_hidden_layers )) * 0.2
+b1 = torch.randn(n_hidden_layers ) * 0.01
+W2 = torch.randn((n_hidden_layers , 27)) * 0.01
+b2 = torch.randn(27) * 0
 parameters = [C, W1, b1, W2, b2]
 
 for p in parameters:
@@ -67,7 +67,7 @@ for p in parameters:
 learning_rate_exp = torch.linspace(-3, 0, 1000)
 learning_rate_steps = 10 ** learning_rate_exp
 
-steps = 20000
+steps = 200000
 batch_size = 32
 learning_rate_i = []
 lossi = []
@@ -82,12 +82,12 @@ for i in range(steps):
     """
     forward pass
     """
-    emb = C[Xtr[ix] ]                             # embedding all integers within X with lookup table C (2 dimensions)
-    embcat = emb.view(emb.shape[0], -1)
-    hpreact = embcat @ W1 + b1
-    h = torch.tanh(emb.view(-1, block_size * n_dimensions) @ W1 + b1)
-    logits = h @ W2 + b2
-    loss = F.cross_entropy(logits, Ytr[ix])       # implementing loss function (nll)
+    emb = C[Xtr[ix] ]                                                       # embedding all integers within X with lookup table C (2 dimensions) into vectors
+    embcat = emb.view(emb.shape[0], -1)                                     # concatenate the vectors from above
+    hpreact = embcat @ W1 + b1                                              # hidden layer pre-activation
+    h = torch.tanh(emb.view(-1, block_size * n_dimensions) @ W1 + b1)       # hidden layer
+    logits = h @ W2 + b2                                                    # output layer
+    loss = F.cross_entropy(logits, Ytr[ix])                                 # implementing loss function (nll)
     # counts = logits.exp()
     # prob = counts / counts.sum(1, keepdims = True)
     # loss = -prob[torch.arange(32), Y].log().mean()
@@ -103,13 +103,16 @@ for i in range(steps):
     update
     """
     # learning_rate = learning_rate_steps[i]
-    learning_rate = 0.01
+    learning_rate = 0.1 if i < 100000 else 0.01
     for p in parameters:
         p.data += -learning_rate * p.grad
 
     """
     track stats to find optimal learning rate
     """
+    if i % 10000 == 0:
+        print(f'{i:7d}/{steps:7d}: {loss.item():.4f}')
+    lossi.append(loss.log10().item())
     # stepi.append(i)
     # lossi.append(loss.log10().item())
 
