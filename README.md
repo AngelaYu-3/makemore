@@ -11,6 +11,7 @@ ___
 - bigram (one character predicts the next character with a lookup table of counts from name.txt data)
 - bigram_nn (one character predicts the next character with neural network trained on name.txt data)
 - [A Neural Probablistic Language Model](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/MLP_paper.pdf)
+- [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/batchNorm_paper.pdf)
 - CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499)
 - RNN, following [Mikolov et al. 2010](https://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)
 - LSTM, following [Graves et al. 2014](https://arxiv.org/abs/1308.0850)
