@@ -29,7 +29,7 @@ The included example **names.txt** dataset has the most common 32K names taken f
 
 ___
 
-## Questions
+## Selected Questions
 
 **Q: For bigram.py, why do we want to use nll loss function? Why does using log loss function make working with probabilities in MLPs better?**
 
