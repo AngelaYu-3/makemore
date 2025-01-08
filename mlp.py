@@ -59,7 +59,9 @@ W1 = torch.randn((block_size * n_dimensions, n_hidden_layers )) * 0.2
 b1 = torch.randn(n_hidden_layers ) * 0.01
 W2 = torch.randn((n_hidden_layers , 27)) * 0.01
 b2 = torch.randn(27) * 0
-parameters = [C, W1, b1, W2, b2]
+bngain = torch.ones((1, n_hidden_layers))
+bnbias = torch.zeros((1, n_hidden_layers))
+parameters = [C, W1, b1, W2, b2, bngain, bnbias]
 
 for p in parameters:
     p.requires_grad = True
@@ -82,12 +84,13 @@ for i in range(steps):
     """
     forward pass
     """
-    emb = C[Xtr[ix] ]                                                       # embedding all integers within X with lookup table C (2 dimensions) into vectors
-    embcat = emb.view(emb.shape[0], -1)                                     # concatenate the vectors from above
-    hpreact = embcat @ W1 + b1                                              # hidden layer pre-activation
-    h = torch.tanh(emb.view(-1, block_size * n_dimensions) @ W1 + b1)       # hidden layer
-    logits = h @ W2 + b2                                                    # output layer
-    loss = F.cross_entropy(logits, Ytr[ix])                                 # implementing loss function (nll)
+    emb = C[Xtr[ix] ]                                                                                       # embedding all integers within X with lookup table C (2 dimensions) into vectors
+    embcat = emb.view(emb.shape[0], -1)                                                                     # concatenate the vectors from above
+    hpreact = embcat @ W1 + b1                                                                              # hidden layer pre-activation
+    hpreact = bngain * (hpreact - hpreact.mean(0, keepdim=True)) / hpreact.std(0, keepdim=True) + bnbias    # batch normalization
+    h = torch.tanh(hpreact)                                       # hidden layer
+    logits = h @ W2 + b2                                                                                    # output layer
+    loss = F.cross_entropy(logits, Ytr[ix])                                                                 # implementing loss function (nll)
     # counts = logits.exp()
     # prob = counts / counts.sum(1, keepdims = True)
     # loss = -prob[torch.arange(32), Y].log().mean()
