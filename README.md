@@ -15,7 +15,7 @@ ___
 ## Key Papers That Current Implementations Follow
 - [A Neural Probablistic Language Model](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/MLP_paper.pdf)
 - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/batchNorm_paper.pdf)
-- [Language Models are Few-Shot Learners by OpenAI](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/openAI_LLM.pdf)
+- [Language Models are Few-Shot Learners](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/openAI_LLM.pdf)
 - CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499)
 - RNN, following [Mikolov et al. 2010](https://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)
 - LSTM, following [Graves et al. 2014](https://arxiv.org/abs/1308.0850)
