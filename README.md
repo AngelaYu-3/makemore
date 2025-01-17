@@ -1,6 +1,6 @@
 # makemore
 
-makemore takes one text file as the input, where each line is assumed to be one piece of training data, and generates more text like that in a given text file (ex: if the given text file is a list of names, makemore generates more names). It is an autoregressive character-level language model, with bigram, MLP, and transformer (like as seen in ChatGPT) models.
+makemore takes one text file as the input, where each line is assumed to be one piece of training data, and generates more text like that in a given text file (ex: if the given text file is a list of names, makemore generates more names). It is an autoregressive character-level language model, with bigram, MLP) models.
 
 This project is for educational purposes and follows the course [Neural Networks: Zero to Hero by Andrej Karpathy](https://www.youtube.com/watch?v=PaCmpygFfXo&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&index=2).
 
@@ -16,11 +16,6 @@ ___
 - [A Neural Probablistic Language Model](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/MLP_paper.pdf)
 - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/batchNorm_paper.pdf)
 - [Language Models are Few-Shot Learners](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/openAI_LLM.pdf)
-- [Attention Is All You Need](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/attentionAllYouNeed.pdf)
-- CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499)
-- RNN, following [Mikolov et al. 2010](https://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)
-- LSTM, following [Graves et al. 2014](https://arxiv.org/abs/1308.0850)
-- GRU, following [Kyunghyun Cho et al. 2014](https://arxiv.org/abs/1409.1259)
 
 ___
 
