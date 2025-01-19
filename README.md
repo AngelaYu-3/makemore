@@ -19,6 +19,12 @@ ___
 
 ___
 
+## Output
+MLP output dictating proximity of letters trained on dataset for 200,000 steps, dimension of 2, batch-size of 32, and 200 hidden layers.
+
+<img src="other/dim2FIgure.png" alt="data1" width="400"/>
+___
+
 ## Included Dataset
 
 The included example **names.txt** dataset has the most common 32K names taken from [ssa.gov](https://www.ssa.gov/) for the year 2018.
