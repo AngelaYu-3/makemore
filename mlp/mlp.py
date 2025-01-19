@@ -52,7 +52,7 @@ Xte, Yte = build_dataset(words[n2:])       # testing data is 10% of total data
 
 
 
-n_dimensions = 10
+n_dimensions = 27
 n_hidden_layers = 200
 C = torch.randn((27, n_dimensions))
 W1 = torch.randn((block_size * n_dimensions, n_hidden_layers )) * 0.2
@@ -124,7 +124,6 @@ for i in range(steps):
 
 """
 plotting graph to visualize character embedding in 2 dimensions
-
 plt.figure(figsize=(8,8))
 plt.scatter(C[:,0].data, C[:,1].data, s=200)
 for i in range(C.shape[0]):
@@ -132,6 +131,7 @@ for i in range(C.shape[0]):
 plt.grid('minor')
 plt.show()
 """
+
 
 
 """
