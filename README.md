@@ -20,7 +20,7 @@ ___
 ___
 
 ## Output
-MLP output dictating proximity of letters trained on dataset for 200,000 steps, dimension of 2, batch-size of 32, and 200 hidden layers.
+MLP output dictating proximity of letters trained on dataset for 200,000 steps, dimension of 2, batch-size of 32, and 200 hidden layers. Note, usually would train with much more than 2 dimensions for better results, but for the sake of visualization, only used 2 dimensions to output this figure.
 
 <img src="other/dim2FIgure.png" alt="data1" width="400"/>
 ___
