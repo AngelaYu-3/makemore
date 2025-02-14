@@ -17,7 +17,6 @@ ___
 ## Key Papers That Current Implementations Follow
 - [A Neural Probablistic Language Model](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/MLP_paper.pdf)
 - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/batchNorm_paper.pdf)
-- [Language Models are Few-Shot Learners](https://github.com/AngelaYu-3/makemore/blob/main/annotated_papers/openAI_LLM.pdf)
 
 ___
 
